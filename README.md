@@ -25,8 +25,8 @@ repeating my mistakes. Start it at [AGENTS.md](AGENTS.md).
 
 | Board | Family | Debug path |
 |---|---|---|
-| Metro RP2040 | RP2040 | Pi Debug Probe, 3-pin SWD |
-| Metro RP2350 | RP2350 | Pi Debug Probe, 3-pin SWD |
+| Metro RP2040 | RP2 | Pi Debug Probe, 3-pin SWD |
+| Metro RP2350 | RP2 | Pi Debug Probe, 3-pin SWD |
 | Metro M0 Express | SAMD21 | Pi Debug Probe, 2x5 SWD |
 | Metro M4 AirLift Lite | SAMD51 | Pi Debug Probe, 2x5 SWD |
 | Feather nRF52840 Express | nRF52 | Pi Debug Probe, 2x5 SWD |
@@ -39,15 +39,15 @@ hub that is always on, so a debugger outlives the board it is debugging.
 
 ## How long things take
 
-All boards in parallel, 4-core host.
+One 4-core host.
 
-| Job | Boards | Time |
-|---|---|---|
-| Flash CircuitPython and verify | 8 | 32.9 s |
-| Build CircuitPython from source | 8 | 11 min 42 s |
-| Flash WipperSnapper and verify online | 4 | 80.7 s |
-| ulab benchmark pass | 8 | 61 s |
-| Arduino | | not measured |
+| Job | Boards | How | Time |
+|---|---|---|---|
+| Flash CircuitPython and verify | 8 | parallel | 32.9 s |
+| Flash WipperSnapper and verify | 4 | parallel | 80.7 s |
+| Build CircuitPython from source | 8 | one at a time | 11 min 42 s |
+| ulab benchmark pass | 8 | one at a time | 61 s |
+| Arduino | | | not measured |
 
 The CircuitPython flash started at 294 s. Details in
 [docs/flashing.md](docs/flashing.md).

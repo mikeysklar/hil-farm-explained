@@ -104,7 +104,8 @@ Other M0 traps:
 - So flash over SWD. The image has a gap: two runs at `0x26000` (256 bytes) and
   `0x27000`. Use `uf2extract.py`.
 - Never `nrf5 mass_erase`. The bootloader is at `0xF4000`.
-- 4000 kHz is fine. 8000 is no faster.
+- Asking for 4000 kHz works and 8000 is no faster. See the note on speeds in
+  [flashing.md](flashing.md).
 - The NeoPixel has a power pin. It stays dark until `NEOPIXEL_POWER` is driven.
 - Slowest board to flash, about 30 s.
 
@@ -146,8 +147,8 @@ Other M0 traps:
 - The touch lands in ROM download mode, `303a:0002`.
 - When wedged (`error -71`, `unable to enumerate`) it needs a long power-off:
   off with `-r 20 -w 200`, sleep 6, on. A wedged board took up to four rounds.
-- Release builds print nothing on the debug UART after the bootloader. Build
-  with `make DEBUG=1` to get output there.
+- Release builds print nothing on the debug UART after the bootloader. A
+  `make DEBUG=1` build should put output there. Not tried.
 - 4 MB flash, so its CIRCUITPY drive is under 1 MB. Large files do not fit.
 
 ## Metro ESP32-S3

@@ -4,16 +4,17 @@ How firmware gets onto each board with nobody pressing a button.
 
 ## Timings
 
-All 8 boards, in parallel, on a 4-core host.
+One 4-core host.
 
-| Job | Time | Notes |
-|---|---|---|
-| Build CircuitPython, 8 boards | 11 min 42 s | `make -j4`, one board after another |
-| Flash CircuitPython, 8 boards | 32.9 s | flash, boot, mounted, `code.py` checksummed |
-| Flash WipperSnapper, 4 boards | 80.7 s | release binaries, includes WiFi join and cloud check |
-| Arduino | not measured | single sketches only, see below |
+| Job | How | Time | Notes |
+|---|---|---|---|
+| Flash CircuitPython, 8 boards | parallel | 32.9 s | flash, boot, mounted, `code.py` checksummed |
+| Flash WipperSnapper, 4 boards | parallel | 80.7 s | release binaries, includes the verify wait |
+| Build CircuitPython, 8 boards | one at a time, `make -j4` | 11 min 42 s | |
+| Arduino | | not measured | single sketches only, see below |
 
-Build time per board:
+Build time per board, from an earlier run than the 11 min 42 s total. These
+rows add up to 15 min 41 s:
 
 | Board | Build |
 |---|---|
@@ -35,17 +36,17 @@ Flash time per board, from [scripts/fastcp.sh](../scripts/fastcp.sh):
 | Metro RP2040 | UF2 drive | 26.5 s | 29.8 s |
 | Metro ESP32-S2 | tinyuf2 + UF2 | 26.5 s | 25.0 s |
 | Metro RP2350 | UF2 drive | 29.2 s | 26.8 s |
-| Feather STM32F405 | SWD at 1000 kHz | 29.2 s | 29.5 s |
+| Feather STM32F405 | SWD, 1000 kHz requested | 29.2 s | 29.5 s |
 | Metro ESP32-S3 | tinyuf2 + UF2 | 29.5 s | 26.9 s |
-| Feather nRF52840 | SWD at 4000 kHz | 30.5 s | 30.2 s |
+| Feather nRF52840 | SWD, 4000 kHz requested | 30.5 s | 30.2 s |
 | **Wall clock** | | **32.9 s** | **32.9 s** |
 
 The clock starts when `code.py` is written and stops when the last board is
 back with a mounted drive and a valid `boot_out.txt`. Downloads and image
 extraction are done beforehand.
 
-The nRF52840 sets the floor. Its 30 s is flash write at 22 KiB/s, and a faster
-adapter clock does not change it. The first run after a firmware change costs
+The nRF52840 sets the floor. Its 30 s is flash write at 22 KiB/s. Asking for a
+faster adapter clock did not change it, but see the note on speeds below. The first run after a firmware change costs
 the two ESP32 boards about 6 s more each.
 
 It took four passes to get here: 294 s, 165 s, 87 s, 32.9 s.
@@ -142,16 +143,26 @@ Each value here was learned by breaking something:
 | M4 AirLift | Connect at 500 kHz | At 2000: `cannot read IDR`, same as an unplugged cable |
 | M0 | `reset halt` | A cold attach to a healthy board fails. See [boards.md](boards.md) |
 | nRF52840 | Never `nrf5 mass_erase` | It erases the UF2 bootloader at `0xF4000` |
-| nRF52840 | Split the image at its gap | A blind concatenation flashes and verifies, and is wrong |
+| nRF52840 | Split the image at its gap | A blind concatenation puts the second run at the wrong address |
 | STM32F405 | 1000 kHz, not 4000 | `failed erasing sectors 4 to 9` with nothing pointing at speed |
 | STM32F405 | Write at `0x08000000` | `UF2_OFFSET = 0x8010000` in `mpconfigboard.mk` is for a different variant. Writing there verifies cleanly and bricks the app |
 | STM32F405 | Let it settle after a port cycle | Flashing 2 s after a cycle failed three times |
-| SAMD, STM32 | Put `adapter speed` after `-f target/...` | The target config silently overrides it |
+| all | Put `adapter speed` after `-f target/...` | The target config sets its own speed and silently overrides yours |
 | all | Disable gdb, tcl and telnet ports | Parallel openocd runs collide on port 3333 |
 | all | `adapter serial <SN>` | `cmsis-dap serial` is not valid in 0.12.0 |
 
 Verify by the board enumerating, not by `verify_image`. The bad STM32 offset
 verified perfectly.
+
+**The speeds above are what was typed, not always what ran.** Stock OpenOCD
+0.12.0 target configs set their own speed: `nrf52.cfg` 1000, `stm32f4x.cfg`
+2000 (and again on every reset), `at91samdXX.cfg` 400, `atsame5x.cfg` 2000.
+The nRF52840 and STM32F405 commands here, and in `fastcp.sh`, put the flag
+before the target config, so by the rule in the table they most likely ran at
+1000 and 2000. That would explain why 8000 was no faster than 4000 on the nRF.
+The commands are left as they were run, because those are the ones that were
+timed. Moving the flag after the config on the nRF52840 has not been tried and
+might lower the 30 s floor.
 
 ### Getting `.bin` files out of a UF2
 
@@ -244,7 +255,7 @@ Over USB alone it is a coin flip:
 |---|---|
 | Stock CircuitPython 10.3.0-rc.0, one attempt | 5 / 12 |
 | Firmware retry loop, one user trigger | 12 / 12 |
-| Arduino sketch, one 1200-baud touch | 1 / 8 |
+| Arduino sketch, one 1200-baud touch | 1 / 8, then 2 / 8 on a second run |
 | Arduino, host retries the touch | 6 / 6, in 1 to 12 touches |
 
 The cause is in ST's mask ROM. See [findings.md](findings.md). The fix is to

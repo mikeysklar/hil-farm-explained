@@ -8,7 +8,7 @@ eight stations have a build.
 |---|---|---|
 | Metro ESP32-S2 | `1.0.0-beta.131` | UF2 via tinyuf2 |
 | Metro ESP32-S3 | `1.0.0-beta.131` | UF2 via tinyuf2 |
-| Metro M4 AirLift Lite | `1.0.0-beta.131` | SWD. Needs nina-fw 1.7.7 or newer, see below |
+| Metro M4 AirLift Lite | `1.0.0-beta.131` | SWD. Needs nina-fw 1.7.7 or newer, see below. The timings here were taken on `beta.85`, before that upgrade |
 | Metro RP2350 | `1.0.0-offline-beta.5` | Offline only, logs to SD |
 | M0, RP2040, nRF52840, STM32F405 | none | No build ships for these |
 
@@ -26,13 +26,14 @@ Four boards in parallel, release binaries, seconds per stage.
 | Firmware flash | 8.4 | 8.9 | 16.2 | 8.3 |
 | First boot | 1.8 | 0.7 | 4.3 | 2.7 |
 | Write `secrets.json` | 0.4 | 0.3 | 0.4 | 0.4 |
-| Verify online | 28.3 | 28.7 | 22.2 | 35.7 |
+| Verify | 28.3 | 28.7 | 22.2 | 35.7 |
 | **Total** | **43.7** | **43.8** | **43.2** | **52.7** |
 
 Wall clock for all four: **80.7 s**. The first attempt took 130.7 s.
 
-Flashing itself is 14 to 21 s per board. The rest is the board joining WiFi and
-registering with Adafruit IO:
+Flashing itself is 14 to 21 s per board. The verify stage is about 11 s of
+power-cycle dwell, then the board joining WiFi and registering with Adafruit
+IO. The RP2350 build is offline and is checked from its log file instead.
 
 | Phase | S2 | S3 |
 |---|---|---|

@@ -41,7 +41,7 @@ debugger?
 | Over SWD | every time |
 | Stock CircuitPython 10.3.0-rc.0, one attempt | 5 / 12 |
 | Firmware retry loop, one user trigger | 12 / 12 |
-| Arduino sketch, one 1200-baud touch | 1 / 8 |
+| Arduino sketch, one 1200-baud touch | 1 / 8, then 2 / 8 on a second run |
 | Arduino, host retries the touch | 6 / 6 |
 
 The jump into ST's ROM always works. Halting the core mid-jump showed the
@@ -123,7 +123,8 @@ same pins worked first try. See [wippersnapper.md](wippersnapper.md).
 ## What the farm cannot do
 
 - Physical changes need a person. When a board was swapped, its debug cable
-  left with it, and a working probe was diagnosed as unplugged for a while.
+  left with it, and a working probe was diagnosed as unplugged for a while. The
+  real cause was adapter speed.
 - Some failures pass every static check.
 - Eight boards catch family-specific breakage. They do not catch what no test
   measures.

@@ -67,6 +67,8 @@ Do not present these as established.
 - Whether the Metro M0's NeoPixel works with the probe unplugged.
 - Any Arduino build or flash timing across the farm.
 - Why REPL pastes to the ESP32 boards sometimes arrive corrupted.
+- The adapter speed the nRF52840 and STM32F405 flashes actually ran at. See the
+  note on speeds in [docs/flashing.md](docs/flashing.md).
 - Whether the ESP32-S2's serial console cable is still connected.
 
 ## Before you act
