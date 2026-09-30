@@ -107,7 +107,7 @@ Host setup is in [docs/setup.md](docs/setup.md).
 
 ## Board weirdisms
 
-One line each. The rest is in [docs/boards.md](docs/boards.md).
+One line each. The rest is in [docs/board-weirdisms.md](docs/board-weirdisms.md).
 
 | Board | Weirdism |
 |---|---|
@@ -145,7 +145,7 @@ people's designs and are linked from [docs/mounting.md](docs/mounting.md).
 | [flashing.md](docs/flashing.md) | Every flash route, timings, Arduino |
 | [wippersnapper.md](docs/wippersnapper.md) | WipperSnapper flashing and the nina-fw upgrade |
 | [debug.md](docs/debug.md) | Probes, wiring, which OpenOCD |
-| [boards.md](docs/boards.md) | Per-board weirdisms |
+| [board-weirdisms.md](docs/board-weirdisms.md) | Per-board weirdisms |
 | [recovery.md](docs/recovery.md) | Power control and the recovery ladder |
 | [traps.md](docs/traps.md) | What I got wrong |
 | [findings.md](docs/findings.md) | What the farm found |

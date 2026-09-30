@@ -27,7 +27,7 @@ way round wastes 12 s a port and looks like a hardware fault.
 | `code.py` breaks the drive on every boot | `microcontroller.on_next_reset(microcontroller.RunMode.SAFE_MODE)` then reset. Safe mode skips `code.py` |
 | Host and Python both see the drive read-only | same, safe mode |
 
-Avoid `microcontroller.reset()` on the Metro M0. See [boards.md](boards.md).
+Avoid `microcontroller.reset()` on the Metro M0. See [board-weirdisms.md](board-weirdisms.md).
 
 ## Rung 2: SWD reset
 

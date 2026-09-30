@@ -8,7 +8,7 @@ learning it. Use it as knowledge, not as a tool to run blind.
 
 1. This file.
 2. [docs/traps.md](docs/traps.md). Every line is a mistake already made once.
-3. [docs/boards.md](docs/boards.md) for the board you are touching.
+3. [docs/board-weirdisms.md](docs/board-weirdisms.md) for the board you are touching.
 4. The doc for the task: [flashing](docs/flashing.md),
    [recovery](docs/recovery.md), [debug](docs/debug.md),
    [wippersnapper](docs/wippersnapper.md), [setup](docs/setup.md).

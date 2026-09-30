@@ -10,7 +10,7 @@ probe per ARM board. Assume nothing about state: read it.
 
 This skill is the short form. The long form is the `docs/` directory of
 https://github.com/mikeysklar/hil-farm-explained. Read `docs/traps.md` and the
-section of `docs/boards.md` for the board you are touching when this page is
+section of `docs/board-weirdisms.md` for the board you are touching when this page is
 not enough.
 
 Edit the Access and Port map sections for your own farm.

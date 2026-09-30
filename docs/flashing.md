@@ -141,7 +141,7 @@ Each value here was learned by breaking something:
 | Board | Rule | What happens otherwise |
 |---|---|---|
 | M4 AirLift | Connect at 500 kHz | At 2000: `cannot read IDR`, same as an unplugged cable |
-| M0 | `reset halt` | A cold attach to a healthy board fails. See [boards.md](boards.md) |
+| M0 | `reset halt` | A cold attach to a healthy board fails. See [board-weirdisms.md](board-weirdisms.md) |
 | nRF52840 | Never `nrf5 mass_erase` | It erases the UF2 bootloader at `0xF4000` |
 | nRF52840 | Split the image at its gap | A blind concatenation puts the second run at the wrong address |
 | STM32F405 | 1000 kHz, not 4000 | `failed erasing sectors 4 to 9` with nothing pointing at speed |
