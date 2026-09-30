@@ -1,4 +1,7 @@
 #!/bin/bash
+# FARM-SPECIFIC, change for your rig: the stage dir S, the tinyuf2 dir W, every
+# USB path and hub/port argument, the probe serials, the esptool path, and the
+# /media/sklarm mount root. See scripts/README.md for the expected image names.
 # 8-board parallel CircuitPython install.
 # Timing methodology per docs/flashing.md: the clock starts when code.py is
 # written and stops when the last board is back with a mounted CIRCUITPY and a

@@ -1,4 +1,5 @@
 #!/bin/bash
+# FARM-SPECIFIC, change for your rig: the ~/cp-tip worktree and the build dirs cleaned.
 # All 8 farm boards at pure tip of main, no local modifications.
 set -u
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

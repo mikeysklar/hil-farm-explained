@@ -1,4 +1,6 @@
 #!/bin/bash
+# FARM-SPECIFIC, change for your rig: PROBE_M4 and PROBE_M0 serials, STATIONS,
+# BOARDS and PORTS (USB paths and hub:port pairs), and the uplink ports named below.
 # Bring the HIL farm up. Counterpart to the shutdown in docs/recovery.md.
 # Safe to re-run: powering an already-on port is a no-op.
 #

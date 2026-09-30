@@ -5,8 +5,10 @@ They are not a framework. They are worked examples with one farm's constants
 baked in. Read them, then change the constants for your own rig.
 
 The only edits made for this repo: references to sibling files now resolve
-relative to the script, instead of `/tmp` and `~/farm-tools`. Temp files and
-locks still live in `/tmp`.
+relative to the script, instead of `/tmp` and `~/farm-tools`, and each script
+has a `FARM-SPECIFIC` comment at the top naming what to change. Temp files and
+locks still live in `/tmp`. The edited copies pass `bash -n` but have not been
+run on the farm since the edit.
 
 | File | What it does |
 |---|---|

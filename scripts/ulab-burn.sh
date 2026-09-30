@@ -1,4 +1,6 @@
 #!/bin/bash
+# FARM-SPECIFIC, change for your rig: the ~/cp-tip worktree and the BOARDS table
+# (name:hub-port:MHz:heap_kB:board_id). The "3-" bus prefix is hardcoded below.
 # Farm ulab burn: the four ulab_bench benches on every board, serially.
 # A sibling of burn.sh, not an addition to it. Same board table, same N/M.
 #

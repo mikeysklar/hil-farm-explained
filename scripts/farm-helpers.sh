@@ -1,4 +1,6 @@
 # shared primitives - source this
+# FARM-SPECIFIC: nothing here is hardcoded to one farm, but bypath assumes one
+# USB host controller (it matches any by-path entry ending in the port chain).
 t() { date +%s%3N; }
 el() { awk "BEGIN{printf \"%.1f\", ($2-$1)/1000}"; }
 bypath() { ls /dev/serial/by-path/*usb-0:${1#*-}:1.0 2>/dev/null | head -1; }

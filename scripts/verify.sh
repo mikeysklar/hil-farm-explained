@@ -1,4 +1,5 @@
 #!/bin/bash
+# FARM-SPECIFIC, change for your rig: the USB path list in the for loop.
 # Verify every board by USB path: resolve its own volume, read boot_out.txt there,
 # and checksum code.py. Never trust a volume label or a successful cp.
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

@@ -1,4 +1,6 @@
 #!/bin/bash
+# FARM-SPECIFIC, change for your rig: the ~/cp-tip worktree, the toolchain PATH,
+# and the BOARDS list.
 # Build the six ARM-port farm boards at tip of main, in the clean worktree.
 # Logs per board; never touches ~/circuitpython.
 set -u

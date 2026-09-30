@@ -1,4 +1,6 @@
 #!/bin/bash
+# FARM-SPECIFIC, change for your rig: the ~/cp-tip worktree and the BOARDS table
+# (name:hub-port:MHz:heap_kB). The "3-" bus prefix is hardcoded below.
 # Farm burn test: light, serial, and designed so a clean pass is genuinely clean.
 #
 # The test set is the intersection of what passed on ALL 8 boards, so the

@@ -1,4 +1,5 @@
 #!/bin/bash
+# FARM-SPECIFIC, change for your rig: the ~/cp-tip worktree and the board names.
 # Build the two espressif farm boards at tip of main in the clean worktree.
 set -u
 cd ~/cp-tip || exit 1
