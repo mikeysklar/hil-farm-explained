@@ -158,3 +158,13 @@ people's designs and are linked from [docs/mounting.md](docs/mounting.md).
 The scripts have my USB paths and probe serial numbers in them. They are
 examples to adapt, not a tool to install. Several things are still unexplained
 and are listed at the end of [docs/traps.md](docs/traps.md).
+
+## License
+
+| What | License |
+|---|---|
+| `scripts/` | MIT, see [LICENSE](LICENSE) |
+| Docs, `README.md`, `AGENTS.md`, `skills/`, `cad/` | CC BY 4.0, see [LICENSE-CC-BY-4.0](LICENSE-CC-BY-4.0) |
+
+The parametric hook and T-nuts linked in [docs/mounting.md](docs/mounting.md)
+are other people's designs under their own licenses and are not in this repo.
