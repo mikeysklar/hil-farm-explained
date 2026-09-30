@@ -1,0 +1,18 @@
+// Let sklarm mount and unmount removable media from a remote (SSH) session.
+//
+// An SSH session has no seat, so udisks2 checks the *-other-seat action rather
+// than the plain one.  org.freedesktop.udisks2.filesystem-mount already passes
+// for an active session; filesystem-mount-other-seat defaults to auth_admin and
+// fails unattended with:
+//
+//   GDBus.Error:org.freedesktop.UDisks2.Error.NotAuthorizedCanObtain
+//
+// Granting only filesystem-mount is therefore not enough and looks correct while
+// still failing.  See docs/setup.md. Change "sklarm" to your user.
+
+polkit.addRule(function (action, subject) {
+    if (action.id.indexOf("org.freedesktop.udisks2.") === 0 &&
+        subject.user === "sklarm") {
+        return polkit.Result.YES;
+    }
+});
